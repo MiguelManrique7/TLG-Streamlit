@@ -12,12 +12,13 @@ import json
 st.header("Netflix App")
 st.write("Aquí puedes visualizar y filtrar películas.")
 
+key_dict=json.loads(st.secrets["textkey"])
+creds = service_account.Credentials.from_service_account_info(key_dict)
+db = firestore.Client(credentials=creds)
+
 # Función para obtener datos de Firestore y crear el DataFrame
 def obtener_datos_firestore():
     # Obtiene la referencia a la colección 'movies'
-    key_dict=json.loads(st.secrets['textkey'])
-    creds = service_account.Credentials.from_service_account_info(key_dict)
-    db = firestore.Client(Credentials=creds, project="retoNetflix1")
     movies_ref = list(db.collection(u'movies').stream())
     movies_dict =  list(map(lambda x: x.to_dict(), movies_ref))
     movies_df = pd.DataFrame(movies_dict)
