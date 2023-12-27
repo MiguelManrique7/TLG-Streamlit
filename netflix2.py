@@ -67,7 +67,7 @@ new_company = st.sidebar.text_input("Company:")
 new_director = st.sidebar.text_input("Director:")
 new_genre = st.sidebar.selectbox("Genre:", df['genre'].unique())
 
-db = firestore.Client.from_service_account_json('keys.json')
+#db = firestore.Client.from_service_account_json('keys.json')
 
 # sumbit = st.sidebar.button("Crear nuevo registro")
 
